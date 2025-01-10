@@ -1,0 +1,149 @@
+
+;; Function print_conv (print_conv, funcdef_no=40, decl_uid=3195, cgraph_uid=41, symbol_order=40)
+
+;; 3 loops found
+;;
+;; Loop 0
+;;  header 0, latch 1
+;;  depth 0, outer -1
+;;  nodes: 0 1 2 3 4 5 6 7 8
+;;
+;; Loop 2
+;;  header 7, latch 6
+;;  depth 1, outer 0
+;;  nodes: 7 6
+;;
+;; Loop 1
+;;  header 4, latch 3
+;;  depth 1, outer 0
+;;  nodes: 4 3
+;; 2 succs { 4 }
+;; 3 succs { 4 }
+;; 4 succs { 3 5 }
+;; 5 succs { 7 }
+;; 6 succs { 7 }
+;; 7 succs { 6 8 }
+;; 8 succs { 1 }
+
+SSA replacement table
+N_i -> { O_1 ... O_j } means that N_i replaces O_1, ..., O_j
+
+k_10 -> { k_5 }
+x_20 -> { x_3 }
+.MEM_21 -> { .MEM_7 }
+k_22 -> { k_4 }
+.MEM_23 -> { .MEM_6 }
+x_24 -> { x_3 }
+k_25 -> { k_4 }
+k_26 -> { k_4 }
+k_27 -> { k_5 }
+.MEM_28 -> { .MEM_6 }
+.MEM_29 -> { .MEM_6 }
+.MEM_30 -> { .MEM_7 }
+.MEM_31 -> { .MEM_7 }
+Incremental SSA update started at block: 12
+Number of blocks in CFG: 15
+Number of blocks to update: 12 ( 80%)
+
+
+Merging blocks 2 and 12
+Merging blocks 3 and 4
+Merging blocks 5 and 9
+Merging blocks 6 and 7
+Removing basic block 10
+Removing basic block 11
+Removing basic block 13
+Removing basic block 14
+void print_conv (unsigned int x, unsigned int y)
+{
+  int k;
+  unsigned int num[32];
+  unsigned int _1;
+  unsigned int _2;
+
+  <bb 2> [local count: 118111600]:
+  num = {};
+  if (x_11(D) != 0)
+    goto <bb 3>; [89.00%]
+  else
+    goto <bb 4>; [11.00%]
+
+  <bb 3> [local count: 955630225]:
+  # x_24 = PHI <x_17(3), x_11(D)(2)>
+  # k_25 = PHI <k_18(3), 0(2)>
+  _1 = x_24 % y_15(D);
+  num[k_25] = _1;
+  x_17 = x_24 / y_15(D);
+  k_18 = k_25 + 1;
+  if (x_17 != 0)
+    goto <bb 3>; [89.00%]
+  else
+    goto <bb 4>; [11.00%]
+
+  <bb 4> [local count: 118111600]:
+  # k_26 = PHI <k_18(3), 0(2)>
+  k_12 = k_26 + -1;
+  if (k_12 != -1)
+    goto <bb 5>; [89.00%]
+  else
+    goto <bb 6>; [11.00%]
+
+  <bb 5> [local count: 955630225]:
+  # k_27 = PHI <k_14(5), k_12(4)>
+  k_14 = k_27 + -1;
+  _2 = num[k_27];
+  __printf_chk (1, "%u", _2);
+  if (k_14 != -1)
+    goto <bb 5>; [89.00%]
+  else
+    goto <bb 6>; [11.00%]
+
+  <bb 6> [local count: 118111600]:
+  num ={v} {CLOBBER};
+  return;
+
+}
+
+
+
+;; Function main (main, funcdef_no=39, decl_uid=3196, cgraph_uid=40, symbol_order=39) (executed once)
+
+;; 1 loops found
+;;
+;; Loop 0
+;;  header 0, latch 1
+;;  depth 0, outer -1
+;;  nodes: 0 1 2 3 4
+;; 2 succs { 4 3 }
+;; 3 succs { }
+;; 4 succs { 1 }
+int main ()
+{
+  static const char __PRETTY_FUNCTION__[5] = "main";
+  int res;
+  unsigned int y;
+  unsigned int x;
+  unsigned int y.0_1;
+  unsigned int x.1_2;
+
+  <bb 2> [local count: 1073741824]:
+  res_5 = scanf ("%u%u", &x, &y);
+  if (res_5 == 2)
+    goto <bb 4>; [99.96%]
+  else
+    goto <bb 3>; [0.04%]
+
+  <bb 3> [local count: 429496]:
+  __assert_fail ("res==2", "ns.c", 13, &__PRETTY_FUNCTION__);
+
+  <bb 4> [local count: 1073312329]:
+  y.0_1 = y;
+  x.1_2 = x;
+  print_conv (x.1_2, y.0_1);
+  x ={v} {CLOBBER};
+  y ={v} {CLOBBER};
+  return 0;
+
+}
+
+

@@ -1,0 +1,226 @@
+
+;; Function print_conv (print_conv, funcdef_no=40, decl_uid=3195, cgraph_uid=41, symbol_order=40)
+
+Points-to analysis
+
+Constraints:
+
+ANYTHING = &ANYTHING
+ESCAPED = *ESCAPED
+ESCAPED = ESCAPED + UNKNOWN
+*ESCAPED = NONLOCAL
+NONLOCAL = &NONLOCAL
+NONLOCAL = &ESCAPED
+INTEGER = &ANYTHING
+x = &NONLOCAL
+y = &NONLOCAL
+num = &NULL
+_1 = x_3 + UNKNOWN
+num = _1
+x_17 = x_3 + UNKNOWN
+k_18 = k_4 + UNKNOWN
+k_18 = &NONLOCAL
+x_3 = x
+x_3 = x_17
+k_4 = &NULL
+k_4 = k_18
+k_12 = k_4 + UNKNOWN
+k_12 = &NONLOCAL
+k_14 = k_5 + UNKNOWN
+k_14 = &NONLOCAL
+_2 = num
+ESCAPED = &NONLOCAL
+ESCAPED = &STRING
+ESCAPED = _2
+k_5 = k_12
+k_5 = k_14
+
+Collapsing static cycles and doing variable substitution
+Building predecessor graph
+Detecting pointer and location equivalences
+Rewriting constraints and unifying variables
+Uniting pointer but not location equivalent variables
+Finding indirect cycles
+Solving graph
+
+Points-to sets
+
+ANYTHING = { ANYTHING }
+ESCAPED = { NULL STRING ESCAPED NONLOCAL }
+NONLOCAL = { ESCAPED NONLOCAL }
+STOREDANYTHING = { }
+INTEGER = { ANYTHING }
+x = { NONLOCAL }
+y = { NONLOCAL } same as x
+num = { NULL NONLOCAL }
+_1 = { NONLOCAL }
+x_3 = { NONLOCAL }
+x_17 = { NONLOCAL }
+k_18 = { NULL NONLOCAL }
+k_4 = { NULL NONLOCAL }
+k_12 = { NULL NONLOCAL }
+k_14 = { NULL NONLOCAL }
+k_5 = { NULL NONLOCAL }
+_2 = { NULL NONLOCAL } same as num
+__printf_chk = { }
+
+
+Alias information for print_conv
+
+Aliased symbols
+
+
+Call clobber information
+
+ESCAPED, points-to non-local, points-to NULL, points-to vars: { }
+
+Flow-insensitive points-to information
+
+
+void print_conv (unsigned int x, unsigned int y)
+{
+  int k;
+  unsigned int num[32];
+  unsigned int _1;
+  unsigned int _2;
+
+  <bb 2> [local count: 118111600]:
+  num = {};
+  goto <bb 4>; [100.00%]
+
+  <bb 3> [local count: 955630225]:
+  _1 = x_3 % y_15(D);
+  num[k_4] = _1;
+  x_17 = x_3 / y_15(D);
+  k_18 = k_4 + 1;
+
+  <bb 4> [local count: 1073741824]:
+  # x_3 = PHI <x_11(D)(2), x_17(3)>
+  # k_4 = PHI <0(2), k_18(3)>
+  if (x_3 != 0)
+    goto <bb 3>; [89.00%]
+  else
+    goto <bb 5>; [11.00%]
+
+  <bb 5> [local count: 118111600]:
+  k_12 = k_4 + -1;
+  goto <bb 7>; [100.00%]
+
+  <bb 6> [local count: 955630225]:
+  k_14 = k_5 + -1;
+  _2 = num[k_5];
+  __printf_chk (1, "%u", _2);
+
+  <bb 7> [local count: 1073741824]:
+  # k_5 = PHI <k_12(5), k_14(6)>
+  if (k_5 != -1)
+    goto <bb 6>; [89.00%]
+  else
+    goto <bb 8>; [11.00%]
+
+  <bb 8> [local count: 118111600]:
+  num ={v} {CLOBBER};
+  return;
+
+}
+
+
+
+;; Function main (main, funcdef_no=39, decl_uid=3196, cgraph_uid=40, symbol_order=39) (executed once)
+
+Points-to analysis
+
+Constraints:
+
+ANYTHING = &ANYTHING
+ESCAPED = *ESCAPED
+ESCAPED = ESCAPED + UNKNOWN
+*ESCAPED = NONLOCAL
+NONLOCAL = &NONLOCAL
+NONLOCAL = &ESCAPED
+INTEGER = &ANYTHING
+ESCAPED = &STRING
+ESCAPED = &x
+ESCAPED = &y
+res_5 = NONLOCAL
+ESCAPED = &STRING
+ESCAPED = &STRING
+ESCAPED = &NONLOCAL
+__PRETTY_FUNCTION__.0 = NONLOCAL
+ESCAPED = &__PRETTY_FUNCTION__.0
+y.0_1 = y
+x.1_2 = x
+ESCAPED = x.1_2
+ESCAPED = y.0_1
+
+Collapsing static cycles and doing variable substitution
+Building predecessor graph
+Detecting pointer and location equivalences
+Rewriting constraints and unifying variables
+Uniting pointer but not location equivalent variables
+Finding indirect cycles
+Solving graph
+
+Points-to sets
+
+ANYTHING = { ANYTHING }
+ESCAPED = { STRING ESCAPED NONLOCAL x y __PRETTY_FUNCTION__.0 }
+NONLOCAL = { ESCAPED NONLOCAL } same as res_5
+STOREDANYTHING = { }
+INTEGER = { ANYTHING }
+x = { ESCAPED NONLOCAL } same as x.1_2
+y = { ESCAPED NONLOCAL } same as y.0_1
+__PRETTY_FUNCTION__.0 = { ESCAPED NONLOCAL }
+*__isoc99_scanf = { }
+res_5 = { ESCAPED NONLOCAL }
+__assert_fail = { }
+y.0_1 = { ESCAPED NONLOCAL }
+x.1_2 = { ESCAPED NONLOCAL }
+print_conv = { }
+main = { }
+
+
+Alias information for main
+
+Aliased symbols
+
+y, UID D.3199, unsigned int, is addressable
+x, UID D.3198, unsigned int, is addressable
+
+Call clobber information
+
+ESCAPED, points-to non-local, points-to vars: { D.3198 D.3199 D.3201 } (nonlocal, escaped)
+
+Flow-insensitive points-to information
+
+
+int main ()
+{
+  static const char __PRETTY_FUNCTION__[5] = "main";
+  int res;
+  unsigned int y;
+  unsigned int x;
+  unsigned int y.0_1;
+  unsigned int x.1_2;
+
+  <bb 2> [local count: 1073741824]:
+  res_5 = scanf ("%u%u", &x, &y);
+  if (res_5 == 2)
+    goto <bb 4>; [99.96%]
+  else
+    goto <bb 3>; [0.04%]
+
+  <bb 3> [local count: 429496]:
+  __assert_fail ("res==2", "ns.c", 13, &__PRETTY_FUNCTION__);
+
+  <bb 4> [local count: 1073312329]:
+  y.0_1 = y;
+  x.1_2 = x;
+  print_conv (x.1_2, y.0_1);
+  x ={v} {CLOBBER};
+  y ={v} {CLOBBER};
+  return 0;
+
+}
+
+

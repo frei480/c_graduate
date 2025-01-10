@@ -1,0 +1,101 @@
+
+;; Function printf (printf, funcdef_no=15, decl_uid=964, cgraph_uid=16, symbol_order=15)
+
+__attribute__((artificial, gnu_inline, always_inline))
+__attribute__((nonnull (1), format (printf, 1, 2)))
+int printf (const char * restrict __fmt)
+{
+  int _4;
+
+  <bb 2> :
+  _4 = __printf_chk (1, __fmt_2(D), __builtin_va_arg_pack ());
+  return _4;
+
+}
+
+
+
+;; Function print_conv (print_conv, funcdef_no=40, decl_uid=3195, cgraph_uid=41, symbol_order=40)
+
+void print_conv (unsigned int x, unsigned int y)
+{
+  int k;
+  unsigned int num[32];
+  unsigned int _1;
+  unsigned int _3;
+
+  <bb 2> :
+  num = {};
+  goto <bb 4>; [INV]
+
+  <bb 3> :
+  _1 = x_4 % y_17(D);
+  num[k_5] = _1;
+  x_19 = x_4 / y_17(D);
+  k_20 = k_5 + 1;
+
+  <bb 4> :
+  # x_4 = PHI <x_12(D)(2), x_19(3)>
+  # k_5 = PHI <0(2), k_20(3)>
+  if (x_4 != 0)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 5>; [INV]
+
+  <bb 5> :
+  # k_11 = PHI <k_5(4)>
+  k_13 = k_11 + -1;
+  goto <bb 7>; [INV]
+
+  <bb 6> :
+  k_15 = k_6 + -1;
+  _3 = num[k_6];
+  __printf_chk (1, "%u", _3);
+
+  <bb 7> :
+  # k_6 = PHI <k_13(5), k_15(6)>
+  if (k_6 != -1)
+    goto <bb 6>; [INV]
+  else
+    goto <bb 8>; [INV]
+
+  <bb 8> :
+  num ={v} {CLOBBER};
+  return;
+
+}
+
+
+
+;; Function main (main, funcdef_no=39, decl_uid=3196, cgraph_uid=40, symbol_order=39)
+
+int main ()
+{
+  static const char __PRETTY_FUNCTION__[5] = "main";
+  int res;
+  unsigned int y;
+  unsigned int x;
+  unsigned int y.0_1;
+  unsigned int x.1_2;
+
+  <bb 2> :
+  res_5 = scanf ("%u%u", &x, &y);
+  if (res_5 == 2)
+    goto <bb 4>; [INV]
+  else
+    goto <bb 3>; [INV]
+
+  <bb 3> :
+  __assert_fail ("res==2", "ns.c", 13, &__PRETTY_FUNCTION__);
+
+  <bb 4> :
+  y.0_1 = y;
+  x.1_2 = x;
+  print_conv (x.1_2, y.0_1);
+  x ={v} {CLOBBER};
+  y ={v} {CLOBBER};
+  return 0;
+
+}
+
+

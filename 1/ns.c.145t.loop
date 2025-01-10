@@ -1,0 +1,63 @@
+
+;; Function print_conv (print_conv, funcdef_no=40, decl_uid=3195, cgraph_uid=41, symbol_order=40)
+
+void print_conv (unsigned int x, unsigned int y)
+{
+  int k;
+  unsigned int num[32];
+  unsigned int _1;
+  unsigned int prephitmp_6;
+  unsigned int pretmp_21;
+
+  <bb 2> [local count: 118111600]:
+  num = {};
+  if (x_11(D) != 0)
+    goto <bb 8>; [89.00%]
+  else
+    goto <bb 10>; [11.00%]
+
+  <bb 10> [local count: 12992276]:
+
+  <bb 3> [local count: 118111600]:
+  num ={v} {CLOBBER};
+  return;
+
+  <bb 8> [local count: 105119324]:
+
+  <bb 4> [local count: 955630225]:
+  # x_24 = PHI <x_17(9), x_11(D)(8)>
+  # k_25 = PHI <k_18(9), 0(8)>
+  _1 = x_24 % y_15(D);
+  num[k_25] = _1;
+  x_17 = x_24 / y_15(D);
+  k_18 = k_25 + 1;
+  if (y_15(D) <= x_24)
+    goto <bb 9>; [89.00%]
+  else
+    goto <bb 7>; [11.00%]
+
+  <bb 9> [local count: 850510901]:
+  goto <bb 4>; [100.00%]
+
+  <bb 7> [local count: 105119324]:
+  goto <bb 6>; [100.00%]
+
+  <bb 5> [local count: 850510901]:
+  pretmp_21 = num[k_14];
+
+  <bb 6> [local count: 955630225]:
+  # k_27 = PHI <k_25(7), k_14(5)>
+  # prephitmp_6 = PHI <_1(7), pretmp_21(5)>
+  k_14 = k_27 + -1;
+  __printf_chk (1, "%u", prephitmp_6);
+  if (k_14 != -1)
+    goto <bb 5>; [89.00%]
+  else
+    goto <bb 11>; [11.00%]
+
+  <bb 11> [local count: 105119324]:
+  goto <bb 3>; [100.00%]
+
+}
+
+

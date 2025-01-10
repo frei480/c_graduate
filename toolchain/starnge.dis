@@ -1,0 +1,73 @@
+
+strange.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <foo>:
+   0:	f3 0f 1e fa          	endbr64 
+   4:	48 89 f8             	mov    %rdi,%rax
+   7:	c7 07 00 00 00 00    	movl   $0x0,(%rdi)
+   d:	c7 47 04 01 00 00 00 	movl   $0x1,0x4(%rdi)
+  14:	c7 47 08 02 00 00 00 	movl   $0x2,0x8(%rdi)
+  1b:	c7 47 0c 03 00 00 00 	movl   $0x3,0xc(%rdi)
+  22:	c7 47 10 04 00 00 00 	movl   $0x4,0x10(%rdi)
+  29:	c7 47 14 05 00 00 00 	movl   $0x5,0x14(%rdi)
+  30:	c7 47 18 00 00 00 00 	movl   $0x0,0x18(%rdi)
+  37:	c7 47 1c 00 00 00 00 	movl   $0x0,0x1c(%rdi)
+  3e:	c7 47 20 00 00 00 00 	movl   $0x0,0x20(%rdi)
+  45:	c7 47 24 00 00 00 00 	movl   $0x0,0x24(%rdi)
+  4c:	c3                   	ret    
+
+000000000000004d <main>:
+  4d:	f3 0f 1e fa          	endbr64 
+  51:	48 83 ec 38          	sub    $0x38,%rsp
+  55:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+  5c:	00 00 
+  5e:	48 89 44 24 28       	mov    %rax,0x28(%rsp)
+  63:	31 c0                	xor    %eax,%eax
+  65:	48 89 e7             	mov    %rsp,%rdi
+  68:	e8 00 00 00 00       	call   6d <main+0x20>
+  6d:	8b 54 24 0c          	mov    0xc(%rsp),%edx
+  71:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 78 <main+0x2b>
+  78:	bf 01 00 00 00       	mov    $0x1,%edi
+  7d:	b8 00 00 00 00       	mov    $0x0,%eax
+  82:	e8 00 00 00 00       	call   87 <main+0x3a>
+  87:	48 8b 44 24 28       	mov    0x28(%rsp),%rax
+  8c:	64 48 2b 04 25 28 00 	sub    %fs:0x28,%rax
+  93:	00 00 
+  95:	75 0a                	jne    a1 <main+0x54>
+  97:	b8 00 00 00 00       	mov    $0x0,%eax
+  9c:	48 83 c4 38          	add    $0x38,%rsp
+  a0:	c3                   	ret    
+  a1:	e8 00 00 00 00       	call   a6 <main+0x59>
+Contents of the .eh_frame section (loaded from strange.o):
+
+
+00000000 0000000000000014 00000000 CIE
+  Version:               1
+  Augmentation:          "zR"
+  Code alignment factor: 1
+  Data alignment factor: -8
+  Return address column: 16
+  Augmentation data:     1b
+  DW_CFA_def_cfa: r7 (rsp) ofs 8
+  DW_CFA_offset: r16 (rip) at cfa-8
+  DW_CFA_nop
+  DW_CFA_nop
+
+00000018 0000000000000010 0000001c FDE cie=00000000 pc=0000000000000000..000000000000004d
+  DW_CFA_nop
+  DW_CFA_nop
+  DW_CFA_nop
+
+0000002c 0000000000000018 00000030 FDE cie=00000000 pc=000000000000004d..00000000000000a6
+  DW_CFA_advance_loc: 8 to 0000000000000055
+  DW_CFA_def_cfa_offset: 64
+  DW_CFA_advance_loc1: 75 to 00000000000000a0
+  DW_CFA_remember_state
+  DW_CFA_def_cfa_offset: 8
+  DW_CFA_advance_loc: 1 to 00000000000000a1
+  DW_CFA_restore_state
+  DW_CFA_nop
+
