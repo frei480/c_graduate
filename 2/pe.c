@@ -13,17 +13,18 @@ int is_prime(int n){
 #include <stdlib.h>
 
 struct sieve_t {
-    int n;           
+    unsigned long long n;           
     unsigned char *s;
 };
 
 
 void fill_sieve(struct sieve_t *sv) {    
-    unsigned long long i, j;    
+    
+    unsigned long long i, j;
     sv->s[0] |= (1 << 0);
     sv->s[0] |= (1 << 1);
-    
-    for (i = 2; i * i < sv->n; i++) {
+
+    for (i = 2; i * i <= (sv->n*8); i++) {
         if (!(sv->s[i / 8] & (1 << (i % 8)))) { 
             for (j = i * i; j <= sv->n; j += i) {
                 sv->s[j / 8] |= (1 << (j % 8)); 
@@ -32,7 +33,7 @@ void fill_sieve(struct sieve_t *sv) {
     }
 }
 
-int is_prime(struct sieve_t *sv, unsigned n) {
+int is_prime(struct sieve_t *sv, unsigned long long n) {
     return !((sv->s[n / 8] >> n % 8) & 1);
 }
 void pn(struct sieve_t *sv, unsigned long long n) {	
@@ -49,8 +50,8 @@ int main() {
    	unsigned long long n = 0;	
 	int res;
     struct sieve_t sv;
-    sv.n = 1000;
-    sv.s = calloc((1000 + 1) / 8,sizeof(char)); 
+    sv.n = 179424673/8+1;
+    sv.s = calloc(sv.n ,sizeof(char)); 
     fill_sieve(&sv);
 
 	res = scanf("%llu", &n);
