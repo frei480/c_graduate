@@ -16,7 +16,7 @@ int is_prime(int n){
 	return 1;
 }
 int main() {
-	//struct sieve_t sv;
+	
     int n=0, N = 0;
     int a, b, digit, max_len = 0;
 	int res;
@@ -27,7 +27,7 @@ int main() {
             n=0;
             while(1){
                 digit = n*n + count_a*n + count_b;   
-                if (digit <=0 || is_prime(digit)) break;
+                if (digit <=0 || !is_prime(digit)) break;
                 n++;
             }
             if (n > max_len){
