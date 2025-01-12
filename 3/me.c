@@ -5,20 +5,24 @@
 
 int majority_element(const int *parr, int len)
 {
-    int max = parr[0];
-    int * buckets;
-    for (int i = 0; i < len; i++){
-        max = (parr[i] > max )? parr[i]: max;
+  int majority, count = 0;
+  for (int i = 0; i < len; i++)
+  {
+    if (count)
+    {
+      count += (parr[i] == majority ? 1 : -1);
     }
-    max++;
-    buckets = calloc(max, sizeof(int));
-    for (int i = 0; i < len; i++)
-        buckets[parr[i]]++;
-
-    for(int i = 0; i < max; i++)
-        if (buckets[i] >= len/2)
-            return i;
-    return -1;
+    else
+    {
+      majority = parr[i];
+      count = 1;
+    }
+  }
+  count = 0;
+  for (int i = 0; i < len; i++)  {
+    if (parr[i] == majority) count++;
+  } 
+  return (count > len/2) ? majority : -1;
 }
 
 int main() {
