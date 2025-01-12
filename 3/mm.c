@@ -24,6 +24,6 @@ int main()
         min = (inp[i] < min ) ? inp[i] : min;
     }
     printf("%d %d", min, max);
-   
+    free(inp);
     return 0;
 }

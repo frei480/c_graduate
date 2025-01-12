@@ -47,5 +47,6 @@ int main()
         swap(inp+(myrand()%i), inp+i-1 );        
     }
     print_array(n, inp);
+    free(inp);
     return 0;
 }
