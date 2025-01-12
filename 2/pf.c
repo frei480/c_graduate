@@ -47,7 +47,6 @@ ull fib_like(ull k, ull n)
         a=tmp;        
         if(fermat_test(b, 10)) {P=a; printf("working\n");}
         }
-      
     return P;
 }
 
