@@ -12,6 +12,18 @@ void swap(int *a, int *b){
     *a=*b;
     *b=tmp;
 }
+int * create_array(int size){
+    int res;
+    int * array = calloc(size, sizeof(int));
+    assert(array);
+
+    for(int i=0; i < size; i++){
+        res=scanf("%d", &array[i]);
+        assert(res == 1);        
+    }
+    return array;
+}
+
 int main()
 {
     int res, min=0, max=0;
@@ -22,13 +34,8 @@ int main()
         return 0;
     }
     
-    int* inp = calloc(n, sizeof(int));
+    int* inp = create_array(n);
     assert(inp);
-
-    for(int i=0; i < n; i++){
-        res=scanf("%d", &inp[i]);
-        assert(res == 1);
-    }
 
     for(int i=n; i > 1; --i)
     {     
