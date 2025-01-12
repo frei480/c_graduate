@@ -20,10 +20,12 @@ int is_prime(struct sieve_t *sv, unsigned n) {
     return (x==0)? 1 : 0;
 }
 
-void fill_sieve(struct sieve_t *sv) {    
-    for (unsigned i = 2; i * i <= sv->n*8+1; i++) 
+void fill_sieve(struct sieve_t *sv) {
+    int size=sv->n;
+    size*=8;    
+    for (unsigned i = 2; i * i <= size+1; i++) 
         if (is_prime(sv, i))  
-            for (unsigned j = i * i; j <= sv->n*8+1; j += i) 
+            for (unsigned j = i * i; j <= size; j += i) 
                 set_prime(sv, j);         
    
 }
@@ -43,7 +45,7 @@ int main() {
 	int res;
     struct sieve_t sv;
     sv.n = 179424673/8+1;
-    sv.s = (char*)calloc(sv.n/8 ,sizeof(char)); 
+    sv.s = (char*)calloc(sv.n ,sizeof(char)); 
     fill_sieve(&sv);
 
 	res = scanf("%llu", &n);
