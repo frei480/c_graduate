@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 int myrand() {
   static unsigned long int seed = 1;
   seed = seed * 1103515245 + 12345;
@@ -23,6 +24,10 @@ int * create_array(int size){
     }
     return array;
 }
+void print_array(unsigned int n, int *inp){
+    for (int i = 0; i < n; i++)
+        printf("%d ", inp[i]);    
+}
 
 int main()
 {
@@ -41,8 +46,6 @@ int main()
     {     
         swap(inp+(myrand()%i), inp+i-1 );        
     }
-    for(int i=0; i < n; i++){
-        printf("%d ", inp[i]);        
-    }
+    print_array(n, inp);
     return 0;
 }
