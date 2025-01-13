@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-
-unsigned pow_mod(unsigned n, unsigned k, unsigned m)
+typedef unsigned long long ull;
+ull pow_mod(ull n, ull k, ull m)
 {
-	unsigned mult = n % m;
-	unsigned prod = 1;
+	ull mult = n% m;
+	ull prod = 1;
 	while (k > 0)
 	{
 		if((k % 2) == 1)
@@ -20,16 +20,23 @@ unsigned pow_mod(unsigned n, unsigned k, unsigned m)
 }
 int main()
 {
-	unsigned a, b, n;
-	unsigned res;
-	res = scanf("%u%u%u", &a, &b, &n);
+	ull a, b, n;
+	ull res;
+	res = scanf("%llu%llu%llu", &a, &b, &n);
 	assert(res == 3);
+	if(b==1){
+		printf("%llu", a);
+    	return 0;
+	}
 	res = a % n;
+	if (b & 1)
+		res = pow_mod(a, res, n) % n;
 	while(b > 0)
 	{
-		res =	pow_mod(res, b, n);
+		res = pow_mod(a, res, n) % n;
 		b--;
 	}
-	printf("%u\n", res);
+	
+	printf("%llu", res);
 	return 0;
 }
