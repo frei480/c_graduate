@@ -62,22 +62,11 @@ int main() {
 	int res;
     Matrix mymatrix = create_matrix();    
     Matrix result = create_matrix();
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            printf("%d ", mymatrix.data[i][j]);
-        }
-        printf("\n");
-    }
         
     res = scanf("%d%d%d%d%d%d", &mymatrix.data[0][0], &mymatrix.data[0][1],
                                 &mymatrix.data[1][0], &mymatrix.data[1][1], &n, &m);
 	assert(res==6);
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            printf("%d ", mymatrix.data[i][j]);
-        }
-        printf("\n");
-    }
+
     matrix_power_mod(&mymatrix, &result, n, m);
     printf("%d %d %d %d\n", result.data[0][0],result.data[0][1], result.data[1][0], result.data[1][1]);
     free_matrix(&mymatrix);
