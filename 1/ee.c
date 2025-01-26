@@ -2,62 +2,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef long long int ll;
 
-
-long long eu_mod(long long x, long long y)
-{
-	long long r;
+ll eu_mod(ll x, ll y){
+	ll r;
 	r = x % y;
-
-	if (r < 0)
-	{		
-		r += abs(y);
-		return r;
+	if (r < 0)	{		
+		r += abs(y);		
 	}
-
 	return r;
 }
-void extended_e(long long a, 
-                       long long b) {
-	long long d, utmp, uold = 1, u = 0, vtmp, vold = 0, v = 1, q, r;
-	if (abs(b) > abs(a))
-	{
-    a = b^a;
- 		b = a^b;
-    a = b^a;
-	}
 
-	while(b != 0)
-	{
+ll extended_e(ll a, ll b, ll* x, ll* y) {
+	ll x0 = 1, x1 = 0, y0=0, y1 = 1, q, r, tmp;    	
+	while(b)	{
 		q = a / b;
-		r = abs(a)-abs(q*b); //eu_mod(a , b); 
-		printf("abs(%lld)-abs(%lld * %lld) = %lld == eu_mod(a,b)=%lld\n",a,q,b, r, eu_mod(a,b) );
-		a = b; 
-		b = r;
-		utmp = u; 
-		u =  uold - q*u; 
-		uold = utmp;
-		vtmp = v; 
-		v = vold - q*v; 
-		vold = vtmp; 
+		if(q<0) q-=1;
+		r = eu_mod(a, b);
+		*x = x0 - q * x1;
+		//for next step
+		a = b; b = r; 
+		x0 = x1; x1 = *x;		
 	}
-	d=a; u = uold; v = vold;
-	assert(d == a*u + b*v);
-	//if(b != 0)
-		//v =  (d - a*u)/b;
-  printf("%lld %lld %lld", u, v, d);
+	*x=x0;
+	return a;	
 }
 
-
 int main() {
-	long long x = 0, y = 0;  
-	
+	ll a = 0, b = 0, x = 0, y = 0, gcd = 0;  	
 	int res;
-  res = scanf("%lld %lld", &x, &y);
-	assert(res == 2);
 	
-  extended_e(x, y);
-  
+  	res = scanf("%lld %lld", &a, &b);
+	assert(res == 2);
+		
+	gcd = extended_e(a, b, &x, &y);
+	y = (gcd - x * a) / b;
+	printf("%lld %lld %lld", x, y, gcd);
 	return 0;
 }
 
